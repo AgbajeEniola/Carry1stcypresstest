@@ -15,30 +15,30 @@ describe('Payment Validation SA', () => {
       cy.get('.rtl\\:font-noto-sans-arabic > :nth-child(4) > .gap-4', { timeout: 30000 }).first().click();
   
       // Focus on the input field, type the country, and select the suggestion
-      cy.get('.countrySelectButton').type('Egypt'); // Type in the input
+      cy.get('.countrySelectButton').type('Saudi Arabia'); // Type in the input
   
       // Replace the previous suggestion selector with your provided one
-      cy.contains('Egypt')
+      cy.contains('Saudi Arabia')
         .should('be.visible')
         .click();
 
         cy.get('[data-testid="save-settings"]').click();
-  
+
         // Wait for the next page to load by checking a key element
         cy.get('#autocomplete-5-input', { timeout: 60000 }).should('be.visible');
     
         // Type into the search bar
-        cy.get('#autocomplete-5-input').type('Razer Gold', { delay: 100 });
+        cy.get('#autocomplete-5-input').type('Free Fire', { delay: 100 });
     
         // Select the product from the suggestion list
-        cy.get('[id^="autocomplete-5-productsPlugin-item"] > div > div', { timeout: 10000 })
-          .contains('Razer Gold')
+        cy.get('.aa-ItemContent', { timeout: 10000 })
+          .contains('Free Fire')
           .should('be.visible')
           .click();
           cy.wait(20000)
     
-        // Choose Razer Gold
-        cy.get('.grid > .cursor-pointer').click();
+        // Choose free fire
+        cy.get('[href="/en/SA/productBundle/free-test-fire-5-610"]').click();
         cy.wait(30000)
     
         // Enter the recipient identifier
@@ -61,17 +61,13 @@ describe('Payment Validation SA', () => {
     
         // Select the card method
         cy.get('[data-sentry-element="Link"] > .relative.flex-col > .card').click();
-    
+
+
         cy.wait(30000) 
-        cy.contains('.card-content', 'Egypt Bank Wallet')
+        cy.contains('.card-content', 'STC Pay')
         .should('be.visible')
         .click(); 
 
-        //Ahly united bank (Egypt Bank Wallet) 
-        cy.wait(30000) 
-        cy.contains('.card-content', 'Ahly United Bank')
-        .should('be.visible')
-        .click(); 
         cy.get(':nth-child(2) > .card > .card-header > .self-center')
   .debug() // Pause execution and inspect the element in the Test Runner
   .should('exist')
@@ -91,14 +87,12 @@ describe('Payment Validation SA', () => {
     cy.get('.h-full > .justify-center').click() 
     cy.wait(20000)
 
-//asserting user can proceed to pay with Ahly united bank
+//asserting user can proceed to pay with Sadad
     cy.get('.max-lg\\:fixed > .flex-col > .justify-center', { timeout: 50000 })
       .should('exist')
       .should('be.visible')
       .debug() // This will log the element details to the Cypress console
       .click({ force: true }); 
+
     })
 })
-
-
-
